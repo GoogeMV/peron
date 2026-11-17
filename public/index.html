@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>peron · Finnish rail punctuality</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <h1 class="brand">peron</h1>
+        <p class="tagline">How late do trains in Finland actually run?</p>
+      </div>
+      <div class="top-right">
+        <a class="map-link" href="/map">Live map →</a>
+        <p id="coverage" class="coverage"></p>
+      </div>
+    </header>
+
+    <main>
+      <div class="filters">
+        <fieldset class="segmented" id="filter-days" aria-label="Period">
+          <button type="button" data-value="7">7 days</button>
+          <button type="button" data-value="30">30 days</button>
+          <button type="button" data-value="90">90 days</button>
+        </fieldset>
+        <fieldset class="segmented" id="filter-category" aria-label="Service type">
+          <button type="button" data-value="all">All passenger</button>
+          <button type="button" data-value="long">Long-distance</button>
+          <button type="button" data-value="commuter">Commuter</button>
+        </fieldset>
+      </div>
+
+      <section class="tiles" id="tiles" aria-label="Summary"></section>
+
+      <section class="card wide">
+        <div class="card-head">
+          <div>
+            <h2>On-time arrivals by day</h2>
+            <p class="sub" id="daily-sub"></p>
+          </div>
+          <div class="legend" id="daily-legend"></div>
+        </div>
+        <div class="plot" id="daily"></div>
+        <details class="table-view">
+          <summary>View as table</summary>
+          <div id="daily-table"></div>
+        </details>
+      </section>
+
+      <div class="grid">
+        <section class="card">
+          <h2>When trains run late</h2>
+          <p class="sub">Share of late arrivals by weekday and departure hour (Finnish time)</p>
+          <div class="plot" id="heatmap"></div>
+          <div class="ramp-legend" id="heatmap-legend"></div>
+        </section>
+
+        <section class="card">
+          <h2>Where arrivals are late</h2>
+          <p class="sub">Each dot is a station; darker means a larger share of late arrivals</p>
+          <div class="plot map" id="map"></div>
+          <div class="ramp-legend" id="map-legend"></div>
+        </section>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Why trains were late</h2>
+          <p class="sub" id="causes-sub"></p>
+          <div class="plot" id="causes"></div>
+        </section>
+
+        <section class="card">
+          <h2>Least punctual trains</h2>
+          <p class="sub" id="worst-sub"></p>
+          <div class="table-wrap" id="worst"></div>
+        </section>
+      </div>
+
+      <section class="card wide">
+        <div class="card-head">
+          <div>
+            <h2>Running now</h2>
+            <p class="sub" id="live-sub"></p>
+          </div>
+        </div>
+        <div class="table-wrap" id="live"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Data: <a href="https://www.digitraffic.fi/en/railway-traffic/">Fintraffic / digitraffic.fi</a>,
+      licensed CC BY 4.0. A train is late when it arrives at its final stop
+      <span id="threshold-note"></span> behind schedule. Cancelled trains are counted separately.
+    </footer>
+
+    <div id="tooltip" class="tooltip" role="status" hidden></div>
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>
